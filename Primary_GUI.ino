@@ -107,6 +107,47 @@ char Location_id[MAX_SUPLA_ID];
 char Location_Pass[MAX_SUPLA_PASS];
 //*********************************************************************************************************
 
+//RGB AND DIMMER ******************************************************************************************
+ unsigned char _red = 0;
+ unsigned char _green = 255;
+ unsigned char _blue = 0;
+ unsigned char _color_brightness = 0;
+ unsigned char _brightness = 0;
+
+void get_rgbw_value(int channelNumber, unsigned char *red, unsigned char *green, unsigned char *blue, unsigned char *color_brightness, unsigned char *brightness) {
+
+  *brightness = _brightness;
+  *color_brightness= _color_brightness;
+
+  *red = _red;
+  *green = _green;
+  *blue = _blue;
+
+}
+
+void set_rgbw() {
+    
+    analogWrite(BRIGHTNESS_PIN, (_brightness * 1023) / 100);
+    analogWrite(COLOR_BRIGHTNESS_PIN, (_color_brightness * 1023) / 100);
+    analogWrite(RED_PIN, _red);
+    analogWrite(GREEN_PIN, _green);
+    analogWrite(BLUE_PIN, _blue);
+}
+
+void set_rgbw_value(int channelNumber, unsigned char red, unsigned char green, unsigned char blue, unsigned char color_brightness, unsigned char brightness) {
+
+    _brightness = brightness;
+    _color_brightness= color_brightness;
+  
+    _red = red;
+    _green = green;
+    _blue = blue;  
+    
+    set_rgbw();
+  
+}
+//*********************************************************************************************************
+
 void setup() {
   Serial.begin(74880);
   EEPROM.begin(EEPROM_SIZE);
@@ -127,6 +168,10 @@ void setup() {
   supla_ds18b20_channel_start();
   supla_dht_start();
   supla_bme_start();
+
+  set_rgbw();
+  // Set RGBW callbacks
+  SuplaDevice.setRGBWCallbacks(&get_rgbw_value, &set_rgbw_value);
 
   if (drd.detectDoubleReset()) {
     drd.stop();
@@ -762,6 +807,18 @@ void add_Relay_Button_Invert(int relay, int button, int type, int DurationMS) {
 void add_Oled() {
   supla_oled_start();
   nr_oled ++;
+}
+
+void add_RGB_Controller_and_Dimmer() {
+  int channel = SuplaDevice.addRgbControllerAndDimmer();
+}
+
+void add_RGB_Controller() {
+  int channel = SuplaDevice.addRgbController();
+}
+
+void add_Dimmer() {
+  int channel = SuplaDevice.addDimmer();
 }
 
 //Convert device id to String

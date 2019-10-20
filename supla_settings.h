@@ -31,6 +31,13 @@
 #define SDA                   4
 #define SCL                   5
 
+//RGB, DIMMER*********************************************************************************************
+#define RED_PIN    14
+#define GREEN_PIN  12
+#define BLUE_PIN   13
+#define BRIGHTNESS_PIN        1 // pin samego dimmera
+#define COLOR_BRIGHTNESS_PIN  15
+
 //EEPROM *************************************************************************************************
 #define EEPROM_SIZE           4096/4
 
@@ -80,6 +87,9 @@ void add_Relay_Button(int relay, int button, int type, int DurationMS);
 void add_Relay_Button_Invert(int relay, int button, int type, int DurationMS);
 void add_DS18B20Multi_Thermometer(int thermpin);
 void add_Oled();
+void add_RGB_Controller_and_Dimmer();
+void add_RGB_Controller();
+void add_Dimmer();
 
 double get_temperature(int channelNumber, double last_val);
 void get_temperature_and_humidity(int channelNumber, double *temp, double *humidity);
