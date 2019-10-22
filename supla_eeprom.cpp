@@ -524,3 +524,56 @@ int read_bme_elevation() {
   EEPROM.end();
   return temp;
 }
+
+void save_ws2812_red(int red) {
+  int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) + 3;
+  EEPROM.begin(EEPROM_SIZE);
+  EEPROM.put(start, red);
+  EEPROM.commit();
+  EEPROM.end();
+}
+
+int read_ws2812_red() {
+  int red = 0;
+  int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) + 3;
+  EEPROM.begin(EEPROM_SIZE);
+  delay(100);
+  EEPROM.get(start, red);
+  EEPROM.end();
+  return red;
+}
+
+void save_ws2812_blue(int blue) {
+  int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) + 6;
+  EEPROM.begin(EEPROM_SIZE);
+  EEPROM.put(start, blue);
+  EEPROM.commit();
+  EEPROM.end();
+}
+
+int read_ws2812_blue() {
+  int blue = 0;
+  int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) + 6;
+  EEPROM.begin(EEPROM_SIZE);
+  delay(100);
+  EEPROM.get(start, blue);
+  EEPROM.end();
+  return blue;
+}
+/* void save_ws2812_green(int green) {
+  int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) + 9;
+  EEPROM.begin(EEPROM_SIZE);
+  EEPROM.put(start, green);
+  EEPROM.commit();
+  EEPROM.end();
+}
+
+int read_ws2812_green() {
+  int green = 0;
+  int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) + 9;
+  EEPROM.begin(EEPROM_SIZE);
+  delay(100);
+  EEPROM.get(start, green);
+  EEPROM.end();
+  return green;
+} */

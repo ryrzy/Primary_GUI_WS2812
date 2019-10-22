@@ -6,13 +6,13 @@
 #define SUPLADEVICE_CPP
 #include <SuplaDevice.h>
 
-#define  SUPLA_DEVICE_NAME     "SUPLA TESTY"
-#define  CONFIG_WIFI_LOGIN     "MODUL SUPLA"
+#define  SUPLA_DEVICE_NAME     "SUPLA_WS2812_test"
+#define  CONFIG_WIFI_LOGIN     "SUPLA_WS2812_test"
 #define  CONFIG_WIFI_PASSWORD  ""
 
 #define  DEFAULT_LOGIN         "admin"
 #define  DEFAULT_PASSWORD      "password"
-#define  DEFAULT_HOSTNAME      "Primary v2"
+#define  DEFAULT_HOSTNAME      "SUPLA_WS2812"
 
 #define  UPDATE_PATH           "/firmware"
 
@@ -35,8 +35,12 @@
 #define RED_PIN    14
 #define GREEN_PIN  12
 #define BLUE_PIN   13
-#define BRIGHTNESS_PIN        1 // pin samego dimmera
+#define BRIGHTNESS_PIN        5 // pin samego dimmera
 #define COLOR_BRIGHTNESS_PIN  15
+
+//WS2812 RGB**********************************************************************************************
+#define WS2812_PIN    5 // pin ws2812
+#define WS2812_LEDS    8 // ilość ledów 
 
 //EEPROM *************************************************************************************************
 #define EEPROM_SIZE           4096/4
@@ -90,6 +94,7 @@ void add_Oled();
 void add_RGB_Controller_and_Dimmer();
 void add_RGB_Controller();
 void add_Dimmer();
+void add_WS2812_RGB();
 
 double get_temperature(int channelNumber, double last_val);
 void get_temperature_and_humidity(int channelNumber, double *temp, double *humidity);

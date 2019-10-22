@@ -27,6 +27,8 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 
+#include <Adafruit_NeoPixel.h>
+
 #include "supla_settings.h"
 #include "supla_eeprom.h"
 #include "supla_web_server.h"
@@ -108,17 +110,25 @@ char Location_Pass[MAX_SUPLA_PASS];
 //*********************************************************************************************************
 
 //RGB AND DIMMER ******************************************************************************************
- unsigned char _red = 0;
- unsigned char _green = 255;
- unsigned char _blue = 0;
- unsigned char _color_brightness = 0;
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(WS2812_LEDS, WS2812_PIN, NEO_GRB + NEO_KHZ800);
+
+int _red = read_ws2812_red();
+//int _green = read_ws2812_green();
+int _blue = read_ws2812_blue();
+
+// unsigned char _red = 0;
+ unsigned char _green = 0;
+// unsigned char _blue = 0;
+
+ unsigned char _color_brightness = 50;
  unsigned char _brightness = 0;
 
 void get_rgbw_value(int channelNumber, unsigned char *red, unsigned char *green, unsigned char *blue, unsigned char *color_brightness, unsigned char *brightness) {
 
   *brightness = _brightness;
   *color_brightness= _color_brightness;
-
+  
   *red = _red;
   *green = _green;
   *blue = _blue;
@@ -126,12 +136,15 @@ void get_rgbw_value(int channelNumber, unsigned char *red, unsigned char *green,
 }
 
 void set_rgbw() {
-    
-    analogWrite(BRIGHTNESS_PIN, (_brightness * 1023) / 100);
-    analogWrite(COLOR_BRIGHTNESS_PIN, (_color_brightness * 1023) / 100);
-    analogWrite(RED_PIN, _red);
-    analogWrite(GREEN_PIN, _green);
-    analogWrite(BLUE_PIN, _blue);
+
+   pixels.setBrightness(byte(_color_brightness));  
+    for(int i=0; i<WS2812_LEDS; i++)
+  {
+    pixels.setPixelColor(i, byte( _red), byte(_green), byte( _blue)); // Dioda "i" oraz skladowe R=255 G=0 B=0
+    pixels.show(); // Wysylamy dane do lancucha
+   // delay(500); // Opoznienie 500ms przed zaswieceniem kolejnej diody
+  }
+
 }
 
 void set_rgbw_value(int channelNumber, unsigned char red, unsigned char green, unsigned char blue, unsigned char color_brightness, unsigned char brightness) {
@@ -142,6 +155,10 @@ void set_rgbw_value(int channelNumber, unsigned char red, unsigned char green, u
     _red = red;
     _green = green;
     _blue = blue;  
+    
+    save_ws2812_red(red);
+//    save_ws2812_green(green);
+    save_ws2812_blue(blue);
     
     set_rgbw();
   
@@ -168,6 +185,8 @@ void setup() {
   supla_ds18b20_channel_start();
   supla_dht_start();
   supla_bme_start();
+
+  pixels.begin(); // Inicjalizacja biblioteki
 
   set_rgbw();
   // Set RGBW callbacks
@@ -819,6 +838,10 @@ void add_RGB_Controller() {
 
 void add_Dimmer() {
   int channel = SuplaDevice.addDimmer();
+}
+
+void add_WS2812_RGB() {
+  int channel = SuplaDevice.addRgbController();
 }
 
 //Convert device id to String
