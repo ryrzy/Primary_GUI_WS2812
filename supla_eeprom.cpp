@@ -525,7 +525,7 @@ int read_bme_elevation() {
   return temp;
 }
 
-void save_ws2812_red(int red) {
+void save_rgb_red(int red) {
   int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) + sizeof(int);
   EEPROM.begin(EEPROM_SIZE);
   EEPROM.put(start, red);
@@ -533,7 +533,7 @@ void save_ws2812_red(int red) {
   EEPROM.end();
 }
 
-int read_ws2812_red() {
+int read_rgb_red() {
   int red = 0;
   int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +sizeof(int);
   EEPROM.begin(EEPROM_SIZE);
@@ -543,7 +543,7 @@ int read_ws2812_red() {
   return red;
 }
 
-void save_ws2812_green(int green) {
+void save_rgb_green(int green) {
   int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +2*sizeof(int);
   EEPROM.begin(EEPROM_SIZE);
   EEPROM.put(start, green);
@@ -551,7 +551,7 @@ void save_ws2812_green(int green) {
   EEPROM.end();
 }
 
-int read_ws2812_green() {
+int read_rgb_green() {
   int green = 0;
   int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +2*sizeof(int);
   EEPROM.begin(EEPROM_SIZE);
@@ -561,7 +561,7 @@ int read_ws2812_green() {
   return green;
 }
 
-void save_ws2812_blue(int blue) {
+void save_rgb_blue(int blue) {
   int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +3*sizeof(int);
   EEPROM.begin(EEPROM_SIZE);
   EEPROM.put(start, blue);
@@ -569,7 +569,7 @@ void save_ws2812_blue(int blue) {
   EEPROM.end();
 }
 
-int read_ws2812_blue() {
+int read_rgb_blue() {
   int blue = 0;
   int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +3*sizeof(int);
   EEPROM.begin(EEPROM_SIZE);
@@ -579,7 +579,7 @@ int read_ws2812_blue() {
   return blue;
 }
 
-void save_ws2812_color_brightness(int color_brightness) {
+void save_rgb_color_brightness(int color_brightness) {
   int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +4*sizeof(int);
   EEPROM.begin(EEPROM_SIZE);
   EEPROM.put(start, color_brightness);
@@ -587,7 +587,7 @@ void save_ws2812_color_brightness(int color_brightness) {
   EEPROM.end();
 }
 
-int read_ws2812_color_brightness() {
+int read_rgb_color_brightness() {
   int color_brightness = 0;
   int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +4*sizeof(int);
   EEPROM.begin(EEPROM_SIZE);
@@ -595,4 +595,21 @@ int read_ws2812_color_brightness() {
   EEPROM.get(start, color_brightness);
   EEPROM.end();
   return color_brightness;
+}
+void save_rgb_brightness(int brightness) {
+  int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +5*sizeof(int);
+  EEPROM.begin(EEPROM_SIZE);
+  EEPROM.put(start, brightness);
+  EEPROM.commit();
+  EEPROM.end();
+}
+
+int read_rgb_brightness() {
+  int brightness = 0;
+  int start = 1 + MAX_SSID + MAX_PASSWORD + MAX_MLOGIN + MAX_MPASSWORD + MAX_SUPLA_SERVER + MAX_SUPLA_ID + MAX_SUPLA_PASS + MAX_HOSTNAME + (SUPLA_GUID_SIZE * 2) + MAX_BUTTON + MAX_RELAY +  MAX_RELAY_STATE + (MAX_DS18B20_SIZE * MAX_DS18B20) + (MAX_DS18B20_NAME * MAX_DS18B20) +5*sizeof(int);
+  EEPROM.begin(EEPROM_SIZE);
+  delay(100);
+  EEPROM.get(start, brightness);
+  EEPROM.end();
+  return brightness;
 }
