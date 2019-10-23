@@ -23,8 +23,9 @@ void save_DS18b20_address(String save, int nr);
 void save_DS18b20_name(String save, int nr);
 void save_bme_elevation(int temp);
 void save_ws2812_red(int red);
-//void save_ws2812_green(int green);
+void save_ws2812_green(int green);
 void save_ws2812_blue(int blue);
+void save_ws2812_color_brightness(int color_brightness);
 
 String read_wifi_ssid(void);
 String read_wifi_pass(void);
@@ -42,7 +43,8 @@ String read_DS18b20_address(int nr);
 String read_DS18b20_name(int nr);
 int read_bme_elevation();
 int read_ws2812_red();
-//int read_ws2812_green();
+int read_ws2812_green();
 int read_ws2812_blue();
+int read_ws2812_color_brightness();
 
 #endif //SUPLA_EEPROM_H

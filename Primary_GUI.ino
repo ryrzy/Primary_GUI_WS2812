@@ -114,14 +114,16 @@ char Location_Pass[MAX_SUPLA_PASS];
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(WS2812_LEDS, WS2812_PIN, NEO_GRB + NEO_KHZ800);
 
 int _red = read_ws2812_red();
-//int _green = read_ws2812_green();
+int _green = read_ws2812_green();
 int _blue = read_ws2812_blue();
 
+int _color_brightness = read_ws2812_color_brightness();
+
 // unsigned char _red = 0;
- unsigned char _green = 0;
+// unsigned char _green = 0;
 // unsigned char _blue = 0;
 
- unsigned char _color_brightness = 50;
+// unsigned char _color_brightness = 50;
  unsigned char _brightness = 0;
 
 void get_rgbw_value(int channelNumber, unsigned char *red, unsigned char *green, unsigned char *blue, unsigned char *color_brightness, unsigned char *brightness) {
@@ -157,8 +159,10 @@ void set_rgbw_value(int channelNumber, unsigned char red, unsigned char green, u
     _blue = blue;  
     
     save_ws2812_red(red);
-//    save_ws2812_green(green);
+    save_ws2812_green(green);
     save_ws2812_blue(blue);
+
+    save_ws2812_color_brightness(color_brightness);
     
     set_rgbw();
   
